@@ -1,0 +1,22 @@
+---
+name: CI for PRs
+on: push
+
+jobs:
+  ci-build:
+    name: Build & Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: docker/build-push-action@v1
+        with:
+          repository: ruby-test-image
+          push: false
+      - uses: addnab/docker-run-action@v1
+        with:
+          image: ruby-test-image:latest
+          shell: sh
+          run: |
+            ruby --version
+            bundle --version
+
