@@ -23,5 +23,6 @@ jobs:
           image: ruby-test-image:latest
           shell: sh
           run: |
+            make --version
             ruby --version
             bundle --version
