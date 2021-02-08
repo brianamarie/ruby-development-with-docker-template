@@ -31,4 +31,4 @@ jobs:
         run: |
           docker run --rm --entrypoint sh \
           -v $GITHUB_WORKSPACE:/workspace  -w /workspace \
-          ${{ steps.docker_build.outputs.digest }} -c "ruby --version && bundle --version && make --version"
+          ${{ steps.docker_build.outputs.digest }} -c "ruby --version && bundle --version && make --version && bundle install && bundle exec rubocop --version"
