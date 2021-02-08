@@ -17,7 +17,7 @@ jobs:
           push: false
           tags: ruby-test-image:latest
 
-      - name: Run Tests
+      - name: Check Installed Dependencies in Image
         uses: addnab/docker-run-action@v1
         with:
           image: ruby-test-image:latest
