@@ -14,8 +14,8 @@ jobs:
 
       - name: Configure Git
         run: |
-          git config --global user.email "${{github.event.pusher.email}}" && \
-          git config --global user.name "${{github.event.pusher.name}}"
+          git config --global user.email "$GITHUB_ACTOR@users.noreply.github.com" && \
+          git config --global user.name "$GITHUB_ACTOR"
 
       - name: Merge Changes in main Into PR Branch
         run: git fetch origin && git checkout $GITHUB_HEAD_REF && git merge origin/$GITHUB_BASE_REF
