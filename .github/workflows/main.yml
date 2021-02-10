@@ -13,7 +13,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Merge Changes in main Into PR Branch
-        run: git fetch origin && git merge origin/main
+        run: git fetch origin && git checkout $GITHUB_HEAD_REF && git merge $GITHUB_BASE_REF
 
       - name: Build Test Image
         id: docker_build
