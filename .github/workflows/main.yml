@@ -1,6 +1,8 @@
 ---
 name: CI for PRs
-on: pull_request.synchronize
+on:
+  pull_request:
+    types: [synchronize]
 
 jobs:
   ci-build:
