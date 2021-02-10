@@ -1,1 +1,3 @@
-FROM debian:9.5-slim
+FROM alpine:latest
+
+RUN apk add make

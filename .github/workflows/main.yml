@@ -24,9 +24,6 @@ jobs:
 
       - name: Check Installed Dependencies in Image
         run: |
-          docker run --rm \
-          --entrypoint sh \
-          -v $GITHUB_WORKSPACE:/workspace \
-          -w /workspace \
-          ruby-test-image:latest
-            make --version && ruby --version && bundle --version
+          docker run --rm --entrypoint sh \
+          -v $GITHUB_WORKSPACE:/workspace  -w /workspace \
+          ${{ steps.docker_build.outputs.digest }} -c "ruby --version && bundle --version && make --version"
