@@ -9,8 +9,11 @@ jobs:
     name: Build & Test
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout src
+      - name: Checkout PR Branch/Tree
         uses: actions/checkout@v2
+
+      - name: Merge Changes in main Into PR Branch
+        run: git fetch origin && git merge origin/main
 
       - name: Build Test Image
         id: docker_build
@@ -20,11 +23,10 @@ jobs:
           tags: ruby-test-image:latest
 
       - name: Check Installed Dependencies in Image
-        uses: addnab/docker-run-action@v1
-        with:
-          image: ruby-test-image:latest
-          shell: sh
-          run: |
-            make --version
-            ruby --version
-            bundle --version
+        run: |
+          docker run --rm \
+          --entrypoint sh \
+          -v $GITHUB_WORKSPACE:/workspace \
+          -w /workspace \
+          ruby-test-image:latest
+            make --version && ruby --version && bundle --version
